@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pricing Detail</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="detail-page" data-favorite-id="pricing-item">
+    <div class="announcement">
+      Announcing SaaShomepage.com — learn more or join us for a live demo.
+    </div>
+    <header class="top-nav">
+      <div class="container nav-inner">
+        <a class="logo" href="index.html">SaaShomepage.com</a>
+
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html#panel-landing">Inspiration</a>
+          <a class="active" href="index.html#panel-pricing">Pricing</a>
+          <a href="templates.html">Templates</a>
+          <a href="favorites.html">Favorites</a>
+          <a href="advertise.html">Advertise</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="theme-toggle" type="button" aria-pressed="false">
+            <span class="theme-toggle-icon" aria-hidden="true"></span>
+            <span class="theme-toggle-label">Theme</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="detail-hero">
+        <div class="container detail-hero-inner">
+          <div class="detail-hero-main">
+            <h1 class="detail-title">Pricing page</h1>
+            <p class="detail-subhead">Scroll the full pricing screenshot and jump to the live pricing page.</p>
+            <div class="detail-actions">
+              <a class="btn btn-primary" id="visit-link" target="_blank" rel="noopener">Visit pricing</a>
+              <button class="btn btn-outline" type="button" data-open-full>Open full view</button>
+              <button class="btn btn-outline" type="button" data-favorite-button>Save to collection</button>
+            </div>
+          </div>
+
+          <div class="detail-hero-aside">
+            <div class="detail-summary">
+              <div>
+                <span class="summary-label">Website</span>
+                <span class="summary-value" id="summary-url">—</span>
+              </div>
+              <div>
+                <span class="summary-label">Type</span>
+                <span class="summary-value">Pricing</span>
+              </div>
+              <div>
+                <span class="summary-label">Updated</span>
+                <span class="summary-value">February 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="detail-content">
+        <div class="container detail-grid">
+          <figure class="detail-shot">
+            <button class="zoom-hint" type="button" data-open-full>Open full view</button>
+            <img id="detail-shot" src="" alt="Pricing page screenshot" loading="lazy" decoding="async" />
+          </figure>
+
+          <aside class="detail-panel">
+            <div class="panel-card panel-primary">
+              <div class="panel-actions">
+                <a class="btn btn-primary" id="visit-link-side" target="_blank" rel="noopener">Visit Pricing</a>
+                <button class="btn btn-outline" type="button" data-favorite-button>Save to collection</button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Restore theme preference (favorites.js also handles theme toggle on detail pages)
+      (function () {
+        const stored = localStorage.getItem("saashomepage:theme");
+        if (stored === "graphite") document.body.classList.add("theme-graphite");
+      })();
+
+      const loadData = () => {
+        try {
+          const cached = sessionStorage.getItem("pricing:detail");
+          if (!cached) return null;
+          return JSON.parse(cached);
+        } catch (e) {
+          return null;
+        }
+      };
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const fallback = loadData();
+      const data = {
+        id: urlParams.get("site") || fallback?.id,
+        name: urlParams.get("name") || fallback?.name,
+        image: urlParams.get("image") || fallback?.image,
+        url: urlParams.get("url") || fallback?.url,
+      };
+
+      if (!data || !data.image || !data.url || !data.name) {
+        document.querySelector(".detail-title").textContent = "Missing data";
+        document.querySelector(".detail-subhead").textContent = "Open a pricing card first.";
+      } else {
+        document.title = `${data.name} — Pricing detail`;
+        document.body.setAttribute("data-favorite-id", data.id || "pricing-item");
+        document.querySelector(".detail-title").textContent = data.name;
+        document.getElementById("summary-url").textContent = data.url.replace(/^https?:\/\//, "");
+        const shot = document.getElementById("detail-shot");
+        shot.src = data.image;
+        shot.alt = `${data.name} pricing screenshot`;
+        const visitLinks = [document.getElementById("visit-link"), document.getElementById("visit-link-side")];
+        visitLinks.forEach((el) => {
+          if (!el) return;
+          el.href = data.url;
+          el.textContent = "Visit pricing";
+        });
+
+        const openFull = () => window.open(data.image, "_blank", "noopener");
+        document.querySelectorAll("[data-open-full]").forEach((btn) => btn.addEventListener("click", openFull));
+      }
+    </script>
+    <script src="favorites.js"></script>
+  </body>
+</html>

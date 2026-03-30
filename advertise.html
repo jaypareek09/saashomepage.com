@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Advertise — SaaShomepage.com</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="announcement">
+      Announcing SaaShomepage.com — learn more or join us for a live demo.
+    </div>
+    <header class="top-nav">
+      <div class="container nav-inner">
+        <a class="logo" href="index.html">SaaShomepage.com</a>
+
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html">Inspiration</a>
+          <a href="templates.html">Templates</a>
+          <a href="favorites.html">Favorites</a>
+          <a class="active" href="advertise.html">Advertise</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="theme-toggle" type="button" aria-pressed="false">
+            <span class="theme-toggle-icon" aria-hidden="true"></span>
+            <span class="theme-toggle-label">Theme</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="favorites" id="advertise">
+        <div class="container">
+          <div class="favorites-head">
+            <div>
+              <h2>Advertise with us</h2>
+              <p>Promote your SaaS product on SaaShomepage.com with a dedicated placement.</p>
+            </div>
+            <a class="btn btn-outline" href="index.html">Back to inspiration</a>
+          </div>
+
+          <div class="empty-panel static-panel advertise-panel">
+            <h3>Advertising enquiries</h3>
+            <p>
+              For any advertising or partnership enquiry, mail us here or copy the address below.
+            </p>
+            <div class="advertise-email-row">
+              <span class="advertise-email">saashomepage@gmail.com</span>
+              <button class="btn btn-outline" type="button" data-copy-email>Copy email</button>
+            </div>
+            <p class="advertise-note">We will use this inbox for sponsorships, featured placements, and collaborations.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="favorites.js"></script>
+    <script>
+      const copyButton = document.querySelector("[data-copy-email]");
+      if (copyButton) {
+        copyButton.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText("saashomepage@gmail.com");
+            copyButton.textContent = "Copied";
+            window.setTimeout(() => {
+              copyButton.textContent = "Copy email";
+            }, 1500);
+          } catch (error) {
+            copyButton.textContent = "Copy failed";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

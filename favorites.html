@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Favorites — SaaShomepage.com</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="announcement">
+      Announcing SaaShomepage.com — learn more or join us for a live demo.
+    </div>
+    <header class="top-nav">
+      <div class="container nav-inner">
+        <a class="logo" href="index.html">SaaShomepage.com</a>
+
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html">Inspiration</a>
+          <a href="templates.html">Templates</a>
+          <a class="active" href="favorites.html">Favorites</a>
+          <a href="advertise.html">Advertise</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="theme-toggle" type="button" aria-pressed="false">
+            <span class="theme-toggle-icon" aria-hidden="true"></span>
+            <span class="theme-toggle-label">Theme</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="favorites" id="favorites">
+        <div class="container">
+          <div class="favorites-head">
+            <div>
+              <h2>Your favorites</h2>
+              <p>Save a homepage to build your personal inspiration board.</p>
+            </div>
+            <a class="btn btn-outline" href="index.html#panel-landing">Browse landing pages</a>
+          </div>
+          <div class="favorites-empty" hidden>
+            <strong>No favorites yet.</strong>
+            <p>Open any landing page and click “Save to collection”.</p>
+          </div>
+          <div class="favorites-grid"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="favorites.js"></script>
+  </body>
+</html>
