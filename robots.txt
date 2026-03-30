@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /favorites.html
+Disallow: /pricing.html
+Disallow: /scripts/
+Disallow: /node_modules/
+
+Sitemap: https://www.saashomepage.com/sitemap.xml
